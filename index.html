@@ -53,14 +53,19 @@
 
     .shield-icon {
       background: radial-gradient(circle at 30% 20%, #3b82f6, #1e3a8a);
-      width: 70px;
-      height: 70px;
-      border-radius: 24px;
+      width: 100px;
+      height: 100px;
+      border-radius: 32px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 12px 24px rgba(59,130,246,0.4);
-      margin-bottom: 1.2rem;
+      box-shadow: 0 20px 32px rgba(59,130,246,0.4);
+      margin-bottom: 1.5rem;
+    }
+
+    .shield-icon svg {
+      width: 52px;
+      height: 52px;
     }
 
     .select-modern {
@@ -101,62 +106,6 @@
       outline: none;
       border-color: #3b82f6;
       box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
-    }
-
-    .toggle-row {
-      background: rgba(0, 0, 0, 0.35);
-      border-radius: 1.5rem;
-      padding: 0.8rem 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border: 1px solid rgba(66, 153, 225, 0.3);
-    }
-
-    .toggle-switch {
-      position: relative;
-      display: inline-block;
-      width: 52px;
-      height: 28px;
-    }
-
-    .toggle-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider-round {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #1e293b;
-      transition: 0.25s;
-      border-radius: 34px;
-      border: 1px solid #3b82f680;
-    }
-
-    .slider-round:before {
-      position: absolute;
-      content: "";
-      height: 22px;
-      width: 22px;
-      left: 3px;
-      bottom: 2px;
-      background-color: white;
-      transition: 0.25s;
-      border-radius: 50%;
-    }
-
-    input:checked + .slider-round {
-      background-color: #2563eb;
-    }
-
-    input:checked + .slider-round:before {
-      transform: translateX(23px);
     }
 
     .btn-bypass {
@@ -229,7 +178,8 @@
     @media (max-width: 720px) {
       body { padding: 1rem; }
       .glass-panel { border-radius: 1.5rem; }
-      .shield-icon { width: 56px; height: 56px; border-radius: 18px; }
+      .shield-icon { width: 80px; height: 80px; border-radius: 24px; }
+      .shield-icon svg { width: 42px; height: 42px; }
     }
   </style>
 </head>
@@ -238,13 +188,13 @@
   <div style="text-align: center; margin-bottom: 2rem;">
     <div style="display: flex; justify-content: center;">
       <div class="shield-icon">
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
           <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
         </svg>
       </div>
     </div>
-    <h1 style="font-size: 2.2rem; font-weight: 800; background: linear-gradient(135deg, #FFFFFF, #90b4ff); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: -0.02em; margin-top: 0.5rem;">Hyperlink Generator</h1>
+    <h1 style="font-size: 2.2rem; font-weight: 800; background: linear-gradient(135deg, #FFFFFF, #90b4ff); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: -0.02em; margin-top: 0.75rem;">Hyperlink Generator</h1>
     <p style="color: #9ab3d5; margin-top: 0.8rem; font-size: 0.9rem;">Mask Roblox links for Discord — bypass warnings instantly.</p>
   </div>
 
@@ -269,17 +219,6 @@
           Enter your link
         </label>
         <input type="text" id="linkInput" class="input-modern" placeholder="https://www.roblox.com/users/... or any Roblox link" value="https://www.roblox.com/games/2753915549/Blox-Fruits">
-      </div>
-
-      <div class="toggle-row">
-        <div>
-          <span style="font-weight: 500; color: white;">Shorten URL</span>
-          <p style="font-size: 0.7rem; color: #90a9dd; margin-top: 2px;">Use if Discord blocks your raw link</p>
-        </div>
-        <label class="toggle-switch">
-          <input type="checkbox" id="shortenToggle">
-          <span class="slider-round"></span>
-        </label>
       </div>
 
       <button id="generateBtn" class="btn-bypass">
@@ -309,7 +248,7 @@
       </svg>
       <span style="font-weight: 500;">Join Discord</span>
     </a>
-    <p style="font-size: 0.7rem; color: #7c8db0; margin-top: 1.2rem;">⚡ Secure automation · real-time bypassing · Roblox link masking</p>
+    <p style="font-size: 0.7rem; color: #7c8db0; margin-top: 1.2rem;">Hyperlink • mask your Roblox links & stay under the radar</p>
   </div>
 </div>
 
@@ -317,7 +256,6 @@
   (function() {
     const linkTypeSelect = document.getElementById('linkTypeSelect');
     const linkInput = document.getElementById('linkInput');
-    const shortenToggle = document.getElementById('shortenToggle');
     const generateBtn = document.getElementById('generateBtn');
     const resultContainer = document.getElementById('resultContainer');
     const generatedLinkSpan = document.getElementById('generatedLink');
@@ -341,17 +279,10 @@
       return '🔗 Hyperlink';
     }
 
-    function generateMaskedLink(originalUrl, linkTypeValue, useShortening) {
+    function generateMaskedLink(originalUrl, linkTypeValue) {
       if (!originalUrl) return '';
-      let targetUrl = originalUrl;
-      if (useShortening) {
-        const hash = btoa(originalUrl).replace(/[^a-zA-Z0-9]/g, '').slice(0, 10);
-        targetUrl = `https://link.hyper/${hash}?ref=${encodeURIComponent(originalUrl)}`;
-      } else {
-        targetUrl = originalUrl;
-      }
       const displayText = getDisplayTextForType(linkTypeValue);
-      return `[${displayText}](${targetUrl})`;
+      return `[${displayText}](${originalUrl})`;
     }
 
     function updateResult(link) {
@@ -378,8 +309,7 @@
       }
       const normalized = normalizeUrl(rawLink);
       const selectedType = linkTypeSelect.value;
-      const useShortening = shortenToggle.checked;
-      const masked = generateMaskedLink(normalized, selectedType, useShortening);
+      const masked = generateMaskedLink(normalized, selectedType);
       updateResult(masked);
     }
 
